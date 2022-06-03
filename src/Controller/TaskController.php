@@ -33,7 +33,7 @@ class TaskController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $manager = $doctrine->getManager();
-
+            $task->setUser($this->getUser());
             $manager->persist($task);
             $manager->flush();
 
