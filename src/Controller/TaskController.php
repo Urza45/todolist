@@ -32,10 +32,10 @@ class TaskController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $doctrine->getManager();
+            $manager = $doctrine->getManager();
 
-            $em->persist($task);
-            $em->flush();
+            $manager->persist($task);
+            $manager->flush();
 
             $this->addFlash('success', 'La tâche a été bien été ajoutée.');
 
@@ -86,9 +86,9 @@ class TaskController extends AbstractController
      */
     public function deleteTaskAction(Task $task, ManagerRegistry $doctrine)
     {
-        $em = $doctrine->getManager();
-        $em->remove($task);
-        $em->flush();
+        $manager = $doctrine->getManager();
+        $manager->remove($task);
+        $manager->flush();
 
         $this->addFlash('success', 'La tâche a bien été supprimée.');
 
