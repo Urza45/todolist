@@ -33,7 +33,7 @@ class TaskController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $manager = $doctrine->getManager();
-
+            $task->setUser($this->getUser());
             $manager->persist($task);
             $manager->flush();
 
@@ -87,11 +87,18 @@ class TaskController extends AbstractController
     public function deleteTaskAction(Task $task, ManagerRegistry $doctrine)
     {
         $manager = $doctrine->getManager();
-        $manager->remove($task);
-        $manager->flush();
 
-        $this->addFlash('success', 'La tâche a bien été supprimée.');
-
+        if (
+            (($task->getUser() === null) && $this->isGranted("ROLE_ADMIN"))
+            or
+            (($task->getUser() == $this->getUser()))
+        ) {
+            $manager->remove($task);
+            $manager->flush();
+            $this->addFlash('success', 'La tâche a bien été supprimée.');
+            return $this->redirectToRoute('task_list');
+        }
+        $this->addFlash('error', 'Vous ne pouvez pas supprimer cette tâche.');
         return $this->redirectToRoute('task_list');
     }
 }
