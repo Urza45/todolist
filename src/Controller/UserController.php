@@ -36,7 +36,7 @@ class UserController extends AbstractController
             $manager = $doctrine->getManager();
             // $password = $this->get('security.password_encoder')->encodePassword($user, $user->getPassword());
             // $user->setPassword($password);
-            
+
             // encode the password
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
@@ -44,6 +44,7 @@ class UserController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
+            $user->setRoles($form->get('roles')->getData());
             $manager->persist($user);
             $manager->flush();
 
