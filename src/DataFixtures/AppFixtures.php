@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Task;
 use App\Entity\User;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -22,16 +23,10 @@ class AppFixtures extends Fixture
                 "password" => "admin",
             ],
             [
-                "username" => "anonyme",
-                "email" => "anonyme@todo.fr",
-                "role" => '"ROLE_USER"',
-                "password" => "anonyme",
-            ],
-            [
-                "username" => "user",
+                "username" => "user1",
                 "email" => "user@todo.fr",
                 "role" => '"ROLE_USER"',
-                "password" => "user",
+                "password" => "user1",
             ],
             [
                 "username" => "user2",
@@ -46,6 +41,29 @@ class AppFixtures extends Fixture
                 "password" => "user3",
             ],
         ];
+
+        $task = new Task();
+        $date = new \DateTime();
+        $isDone = random_int(0, 1);
+
+        $task->setCreatedAt($date);
+        $task->setTitle('Tache sans user 1');
+        $task->setContent('Un exemple de tâche');
+        $task->toggle($isDone);
+
+        $manager->persist($task);
+
+        $task = new Task();
+        $date = new \DateTime();
+        $isDone = random_int(0, 1);
+
+        $task->setCreatedAt($date);
+        $task->setTitle('Tache sans user 2');
+        $task->setContent('Un exemple de tâche');
+        $task->toggle($isDone);
+
+        $manager->persist($task);
+
         foreach ($users as $individu) {
             $user = new User();
             $user->setUsername($individu['username']);
@@ -58,6 +76,19 @@ class AppFixtures extends Fixture
                 )
             );
             $manager->persist($user);
+            for ($i = 1; $i <= 5; $i++) {
+                $task = new Task();
+                $date = new \DateTime();
+                $isDone = random_int(0, 1);
+
+                $task->setCreatedAt($date);
+                $task->setTitle('Tache n° ' . $i);
+                $task->setContent('Un exemple de tâche ' . $i);
+                $task->toggle($isDone);
+                $task->setUSer($user);
+
+                $manager->persist($task);
+            }
         }
 
         $manager->flush();
