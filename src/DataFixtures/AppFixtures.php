@@ -46,7 +46,7 @@ class AppFixtures extends Fixture
                 "password" => "user3",
             ],
         ];
-        foreach ($users as $individu){
+        foreach ($users as $individu) {
             $user = new User();
             $user->setUsername($individu['username']);
             $user->setEmail($individu['email']);
@@ -57,10 +57,8 @@ class AppFixtures extends Fixture
                     $individu['password']
                 )
             );
-            
-
+            $manager->persist($user);
         }
-
 
         $manager->flush();
     }
