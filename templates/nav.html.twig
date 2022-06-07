@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #e3f2fd;">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="#">To Do List app
+			<img src="{{ asset('img/Logo_OpenClassrooms.png') }}" alt="OpenClassrooms" height="24" class="d-inline-block align-text-top">
+		</a>
+
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavDropdown">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link active" aria-current="page" href="{{ path('homepage') }}">Accueil</a>
+				</li>
+				{% if app.user %}
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Tâches
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+							<li>
+								<a class="dropdown-item" href="{{ path('task_create') }}">Créer une tâche</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="{{ path('task_list') }}">Liste complète</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">Liste des tâches à faire</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">Liste des tâches terminées</a>
+							</li>
+						</ul>
+					</li>
+				{% endif %}
+				{% if app.user %}
+					{% if 'ROLE_ADMIN' in app.user.roles %}
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								Utilisateurs
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+								<li>
+									<a class="dropdown-item" href="{{ path('user_create') }}">Créer un utilisateur</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="{{ path('user_list') }}">Liste des utilisateurs</a>
+								</li>
+							</ul>
+						</li>
+					{% endif %}
+				{% endif %}
+				{% if app.user %}
+					<li class="nav-item pull-right">
+						<a href="{{ path('logout') }}" class="pull-right btn btn-danger">Se déconnecter</a>
+					</li>
+				{% endif %}
+				{% if not app.user and 'login' != app.request.attributes.get('_route') %}
+					<li class="nav-item">
+						<a href="{{ path('login') }}" class="pull-right btn btn-success">Se connecter</a>
+					</li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+</nav>
