@@ -21,15 +21,15 @@ class RepeatedPasswordType extends AbstractType
         $constraints = [
             new NotBlank(
                 [
-                    'message' => 'Entrer votre mot de passe.',
+                    'message' => 'Entrer le mot de passe.',
                 ]
             ),
             new Length(
                 [
                     'min' => 6,
-                    'minMessage' => 'Votre mot de passe doit contenir au moins 6 caractères',
+                    'minMessage' => 'Le mot de passe doit contenir au moins 6 caractères',
                     'max' => 10,
-                    'maxMessage' => 'Votre mot de passe doit contenir au plus 10 caractères.',
+                    'maxMessage' => 'Le mot de passe doit contenir au plus 10 caractères.',
                 ]
             ),
         ];
@@ -42,24 +42,24 @@ class RepeatedPasswordType extends AbstractType
                 'first_options' => [
                     'label' => 'Mot de passe (*) :',
                     'label_attr' => [
-                        'title' => 'Votre mot de passe doit avoir entre 6 et 10 caractères.'
+                        'title' => 'Le mot de passe doit avoir entre 6 et 10 caractères.'
                     ],
                     'attr' => [
                         'autocomplete' => 'new-password',
                         'class' => 'form-control',
-                        'placeholder' => 'Votre mot de passe'
+                        'placeholder' => 'Le mot de passe'
                     ],
                     'constraints' => $constraints,
                 ],
                 'second_options' => [
                     'label' => 'Confirmer le mot de passe (*) :',
                     'label_attr' => [
-                        'title' => 'Confirmez votre mot de passe.'
+                        'title' => 'Confirmez le mot de passe.'
                     ],
                     'attr' => [
                         'autocomplete' => 'new-password',
                         'class' => 'form-control',
-                        'placeholder' => 'Répéter votre mot de passe'
+                        'placeholder' => 'Répéter le mot de passe'
                     ],
                     'constraints' => $constraints,
                 ]

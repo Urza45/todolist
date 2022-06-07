@@ -24,7 +24,8 @@ class UserType extends AbstractType
                 [
                     'label' => "Nom d'utilisateur (*)",
                     'attr' => [
-                        'class' => 'form-control'
+                        'class' => 'form-control',
+                        'placeholder' => 'Le nom d\'utilisateur'
                     ]
                 ]
             )
@@ -49,7 +50,8 @@ class UserType extends AbstractType
                 [
                     'label' => 'Adresse email (*)',
                     'attr' => [
-                        'class' => 'form-control'
+                        'class' => 'form-control',
+                        'placeholder' => 'L\'adresse email'
                     ]
                 ]
             )
@@ -62,6 +64,7 @@ class UserType extends AbstractType
                         'Admininistrateur' => 'ROLE_ADMIN',
                         'Utilisateur' => 'ROLE_USER',
                     ],
+                    'label' => 'Roles (*)',
                     'expanded'  => false, // liste déroulante
                     'multiple'  => true, // choix multiple
                     'attr' => [

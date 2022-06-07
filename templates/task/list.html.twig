@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block header_img %}
-	<img class="slide-image" src="{{ asset('img/todolist_content.jpg') }}" alt="todo list">
+{% block header_title %}
+	<h1>{{ titre }}</h1>
 {% endblock %}
 
 {% block body %}
-	<a href="{{ path('task_create') }}" class="btn btn-info pull-right">Créer une tâche</a>
+	{% include "task/buttonsTask.html.twig" %}
+
+	<hr/>
 	<div class="row">
 		{% for task in tasks %}
 			<div class="col-sm-4 col-lg-4 col-md-4">
@@ -36,10 +38,10 @@
 						</p>
 						<p>{{ task.content }}</p>
 					</div>
-					<div class="row">
+					<div class="row p-3 mb-2 bg-white text-dark rounded-pill">
 						<div class="col">
 							<form action="{{ path('task_toggle', {'id' : task.id }) }}">
-								<button class="btn btn-success btn-sm pull-right">
+								<button class="btn btn-success btn-sm col-lg-12 col-12">
 									{% if not task.isDone %}Marquer comme faite{% else %}Marquer non terminée
 									{% endif %}
 								</button>
@@ -47,7 +49,7 @@
 						</div>
 						<div class="col">
 							<form action="{{ path('task_delete', {'id' : task.id }) }}">
-								<button class="btn btn-danger btn-sm pull-right">Supprimer</button>
+								<button class="btn btn-danger btn-sm col-lg-12 col-12">Supprimer</button>
 							</form>
 						</div>
 
