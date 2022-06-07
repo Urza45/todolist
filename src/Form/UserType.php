@@ -15,6 +15,13 @@ use App\Form\FormExtension\RepeatedPasswordType;
 
 class UserType extends AbstractType
 {
+    /**
+     * buildForm
+     *
+     * @param  FormBuilderInterface $builder
+     * @param  array $options
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder

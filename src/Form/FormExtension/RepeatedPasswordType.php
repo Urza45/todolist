@@ -11,11 +11,22 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class RepeatedPasswordType extends AbstractType
 {
+    /**
+     * getParent
+     *
+     * @return string
+     */
     public function getParent(): string
     {
         return RepeatedType::class;
     }
 
+    /**
+     * configureOptions
+     *
+     * @param  OptionsResolver $resolver
+     * @return void
+     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $constraints = [

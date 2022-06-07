@@ -16,14 +16,26 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class TaskRepository extends ServiceEntityRepository
 {
+    /**
+     * __construct
+     *
+     * @param  ManagerRegistry $registry
+     * @return void
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Task::class);
     }
 
     /**
+     * add
+     * 
      * @throws ORMException
      * @throws OptimisticLockException
+     *
+     * @param  mixed $entity
+     * @param  mixed $flush
+     * @return void
      */
     public function add(Task $entity, bool $flush = true): void
     {
@@ -34,8 +46,14 @@ class TaskRepository extends ServiceEntityRepository
     }
 
     /**
+     * remove
+     * 
      * @throws ORMException
      * @throws OptimisticLockException
+     *
+     * @param  mixed $entity
+     * @param  mixed $flush
+     * @return void
      */
     public function remove(Task $entity, bool $flush = true): void
     {

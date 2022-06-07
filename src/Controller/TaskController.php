@@ -5,16 +5,23 @@ namespace App\Controller;
 use App\Entity\Task;
 use App\Form\TaskType;
 use App\Repository\TaskRepository;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Services\ValidationAccess;
 // use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TaskController extends AbstractController
 {
+
     /**
+     * listAction
+     * 
      * @Route("/tasks", name="task_list")
+     *
+     * @param  TaskRepository $repoTask
+     * @return void
      */
     public function listAction(TaskRepository $repoTask)
     {
@@ -28,7 +35,12 @@ class TaskController extends AbstractController
     }
 
     /**
+     * listToDoAction
+     * 
      * @Route("/tasks/todo", name="task_list_todo")
+     *
+     * @param  TaskRepository $repoTask
+     * @return void
      */
     public function listToDoAction(TaskRepository $repoTask)
     {
@@ -42,7 +54,12 @@ class TaskController extends AbstractController
     }
 
     /**
+     * listDoneAction
+     * 
      * @Route("/tasks/done", name="task_list_done")
+     *
+     * @param  TaskRepository $repoTask
+     * @return void
      */
     public function listDoneAction(TaskRepository $repoTask)
     {
@@ -56,7 +73,13 @@ class TaskController extends AbstractController
     }
 
     /**
+     * createAction
+     * 
      * @Route("/tasks/create", name="task_create")
+     *
+     * @param  Request $request
+     * @param  ManagerRegistry $doctrine
+     * @return void
      */
     public function createAction(Request $request, ManagerRegistry $doctrine)
     {
@@ -80,7 +103,14 @@ class TaskController extends AbstractController
     }
 
     /**
+     * editAction
+     * 
      * @Route("/tasks/{id}/edit", name="task_edit")
+     *
+     * @param  Task $task
+     * @param  Request $request
+     * @param  ManagerRegistry $doctrine
+     * @return void
      */
     public function editAction(Task $task, Request $request, ManagerRegistry $doctrine)
     {
@@ -103,7 +133,13 @@ class TaskController extends AbstractController
     }
 
     /**
+     * toggleTaskAction
+     * 
      * @Route("/tasks/{id}/toggle", name="task_toggle")
+     *
+     * @param  Task $task
+     * @param  ManagerRegistry $doctrine
+     * @return void
      */
     public function toggleTaskAction(Task $task, ManagerRegistry $doctrine)
     {
@@ -121,17 +157,19 @@ class TaskController extends AbstractController
     }
 
     /**
+     * deleteTaskAction
+     * 
      * @Route("/tasks/{id}/delete", name="task_delete")
+     *
+     * @param  Task $task
+     * @param  ManagerRegistry $doctrine
+     * @return void
      */
-    public function deleteTaskAction(Task $task, ManagerRegistry $doctrine)
+    public function deleteTaskAction(Task $task, ManagerRegistry $doctrine, ValidationAccess $validator)
     {
         $manager = $doctrine->getManager();
 
-        if (
-            (($task->getUser() === null) && $this->isGranted("ROLE_ADMIN"))
-            or
-            (($task->getUser() == $this->getUser()))
-        ) {
+        if ($validator->deleteGranted($task, $this->getUser())) {
             $manager->remove($task);
             $manager->flush();
             $this->addFlash('success', 'La tâche a bien été supprimée.');
