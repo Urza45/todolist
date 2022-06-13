@@ -88,6 +88,6 @@ class UserControllerTest extends WebTestCase
         $this->client->followRedirect();
         $this->assertSelectorNotExists('.alert.alert-danger');
 
-        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
     }
 }

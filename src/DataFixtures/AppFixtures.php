@@ -25,27 +25,27 @@ class AppFixtures extends Fixture
             [
                 "username" => "admin",
                 "email" => "admin@todo.fr",
-                "role" => '"ROLE_ADMIN"',
+                "role" => 'ROLE_ADMIN',
                 // "password" => "admin",
-                "password" => '$2y$13$g/xtMFCwsheZAdAbiQ15SuGSH.djMptExAgwphJwzLI862cg0ZhrG'
+                "password" => '$2y$13$KKB50kUtBoEuUv23uur8Bu6MWsK630n1ULQwBsNXwo9BjCu/0R5da'
             ],
             [
                 "username" => "user1",
                 "email" => "user@todo.fr",
-                "role" => '"ROLE_USER"',
-                "password" => '$2y$13$g/xtMFCwsheZAdAbiQ15SuGSH.djMptExAgwphJwzLI862cg0ZhrG'
+                "role" => 'ROLE_USER',
+                "password" => '$2y$13$KKB50kUtBoEuUv23uur8Bu6MWsK630n1ULQwBsNXwo9BjCu/0R5da'
             ],
             [
                 "username" => "user2",
                 "email" => "user2@todo.fr",
-                "role" => '"ROLE_USER"',
-                "password" => '$2y$13$g/xtMFCwsheZAdAbiQ15SuGSH.djMptExAgwphJwzLI862cg0ZhrG'
+                "role" => 'ROLE_USER',
+                "password" => '$2y$13$KKB50kUtBoEuUv23uur8Bu6MWsK630n1ULQwBsNXwo9BjCu/0R5da'
             ],
             [
                 "username" => "user3",
                 "email" => "user3@todo.fr",
-                "role" => '"ROLE_USER"',
-                "password" => '$2y$13$g/xtMFCwsheZAdAbiQ15SuGSH.djMptExAgwphJwzLI862cg0ZhrG'
+                "role" => 'ROLE_USER',
+                "password" => '$2y$13$KKB50kUtBoEuUv23uur8Bu6MWsK630n1ULQwBsNXwo9BjCu/0R5da'
             ],
         ];
 

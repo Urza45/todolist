@@ -4,6 +4,7 @@ namespace App\Tests\Controller;
 
 use App\Repository\TaskRepository;
 use App\Repository\UserRepository;
+use App\Services\ValidationAccess;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HTTPFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -17,7 +18,7 @@ class TaskControllerTest extends WebTestCase
         $this->client = static::createClient();
     }
 
-    private function getUser()
+    private function getTestUser()
     {
         $userRepository = static::getContainer()->get(UserRepository::class);
         // retrieve the test user
@@ -28,7 +29,7 @@ class TaskControllerTest extends WebTestCase
 
     public function testListAction()
     {
-        $this->getUser();
+        $this->getTestUser();
         $urlGenerator = $this->client->getContainer()->get('router.default');
 
         $this->client->request(
@@ -41,7 +42,7 @@ class TaskControllerTest extends WebTestCase
 
     public function testListToDoAction()
     {
-        $this->getUser();
+        $this->getTestUser();
         $urlGenerator = $this->client->getContainer()->get('router.default');
 
         $this->client->request(
@@ -54,7 +55,7 @@ class TaskControllerTest extends WebTestCase
 
     public function testListDoneAction()
     {
-        $this->getUser();
+        $this->getTestUser();
         $urlGenerator = $this->client->getContainer()->get('router.default');
 
         $this->client->request(
@@ -67,7 +68,7 @@ class TaskControllerTest extends WebTestCase
 
     public function testCreateAction()
     {
-        $this->getUser();
+        $this->getTestUser();
         $urlGenerator = $this->client->getContainer()->get('router.default');
         $crawler = $this->client->request(
             Request::METHOD_POST,
@@ -90,7 +91,7 @@ class TaskControllerTest extends WebTestCase
 
     public function testEditAction()
     {
-        $this->getUser();
+        $this->getTestUser();
         $urlGenerator = $this->client->getContainer()->get('router.default');
         $crawler = $this->client->request(
             Request::METHOD_GET,
@@ -113,7 +114,7 @@ class TaskControllerTest extends WebTestCase
 
     public function testToggleTaskAction()
     {
-        $this->getUser();
+        $this->getTestUser();
         $urlGenerator = $this->client->getContainer()->get('router.default');
         $crawler = $this->client->request(
             Request::METHOD_GET,
@@ -125,7 +126,7 @@ class TaskControllerTest extends WebTestCase
 
     public function testGrantedDeleteTaskAction()
     {
-        $this->getUser();
+        $this->getTestUser();
         $urlGenerator = $this->client->getContainer()->get('router.default');
         $crawler = $this->client->request(
             Request::METHOD_GET,
@@ -135,15 +136,17 @@ class TaskControllerTest extends WebTestCase
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
     }
 
-    public function testNotGrantedDeleteTaskAction()
+    public function testNotGrantedDeleteTaskAction(ValidationAccess $validator)
     {
-        $this->getUser();
+        $user = $this->getTestUser();
+
+
         $urlGenerator = $this->client->getContainer()->get('router.default');
         $crawler = $this->client->request(
             Request::METHOD_POST,
-            $urlGenerator->generate('task_delete', ["id" => 6])
+            $urlGenerator->generate('task_delete', ["id" => 8])
         );
 
-        $this->assertResponseStatusCodeSame(Response::HTTP_FORBIDDEN);
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
     }
 }
