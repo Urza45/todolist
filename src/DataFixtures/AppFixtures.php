@@ -6,10 +6,10 @@ use App\Entity\Task;
 use App\Entity\User;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+// use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
-{    
+{
     /**
      * load
      *
@@ -18,7 +18,7 @@ class AppFixtures extends Fixture
      */
     public function load(ObjectManager $manager): void
     {
-        $userPasswordHasher = new UserPasswordHasherInterface();
+        // $userPasswordHasher = new UserPasswordHasherInterface();
         // $product = new Product();
         // $manager->persist($product);
         $users = [
@@ -26,25 +26,26 @@ class AppFixtures extends Fixture
                 "username" => "admin",
                 "email" => "admin@todo.fr",
                 "role" => '"ROLE_ADMIN"',
-                "password" => "admin",
+                // "password" => "admin",
+                "password" => '$2y$13$g/xtMFCwsheZAdAbiQ15SuGSH.djMptExAgwphJwzLI862cg0ZhrG'
             ],
             [
                 "username" => "user1",
                 "email" => "user@todo.fr",
                 "role" => '"ROLE_USER"',
-                "password" => "user1",
+                "password" => '$2y$13$g/xtMFCwsheZAdAbiQ15SuGSH.djMptExAgwphJwzLI862cg0ZhrG'
             ],
             [
                 "username" => "user2",
                 "email" => "user2@todo.fr",
                 "role" => '"ROLE_USER"',
-                "password" => "user2",
+                "password" => '$2y$13$g/xtMFCwsheZAdAbiQ15SuGSH.djMptExAgwphJwzLI862cg0ZhrG'
             ],
             [
                 "username" => "user3",
                 "email" => "user3@todo.fr",
                 "role" => '"ROLE_USER"',
-                "password" => "user3",
+                "password" => '$2y$13$g/xtMFCwsheZAdAbiQ15SuGSH.djMptExAgwphJwzLI862cg0ZhrG'
             ],
         ];
 
@@ -75,12 +76,12 @@ class AppFixtures extends Fixture
             $user->setUsername($individu['username']);
             $user->setEmail($individu['email']);
             $user->setRoles([$individu['role']]);
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $individu['password']
-                )
-            );
+            $user->setPassword($individu['password']);
+            //     $userPasswordHasher->hashPassword(
+            //         $user,
+            //         $individu['password']
+            //     )
+            // );
             $manager->persist($user);
             for ($i = 1; $i <= 5; $i++) {
                 $task = new Task();
