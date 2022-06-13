@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Task;
 use App\Form\TaskType;
 use App\Repository\TaskRepository;
-use App\Services\ValidationAccess;
 // use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -165,11 +164,12 @@ class TaskController extends AbstractController
      * @param  ManagerRegistry $doctrine
      * @return void
      */
-    public function deleteTaskAction(Task $task, ManagerRegistry $doctrine, ValidationAccess $validator)
+    public function deleteTaskAction(Task $task, ManagerRegistry $doctrine)
     {
+        // $this->denyAccessUnlessGranted('task_delete', $task, 'Vous ne pouvez pas supprimer cette tâche');
         $manager = $doctrine->getManager();
 
-        if ($validator->deleteGranted($task, $this->getUser())) {
+        if ($this->isGranted('task_delete', $task)) {
             $manager->remove($task);
             $manager->flush();
             $this->addFlash('success', 'La tâche a bien été supprimée.');
