@@ -167,9 +167,10 @@ class TaskController extends AbstractController
      */
     public function deleteTaskAction(Task $task, ManagerRegistry $doctrine, ValidationAccess $validator)
     {
+        // $this->denyAccessUnlessGranted('task_delete', $task, 'Vous ne pouvez pas supprimer cette tâche');
         $manager = $doctrine->getManager();
 
-        if ($validator->deleteGranted($task, $this->getUser())) {
+        if ($this->isGranted('task_delete', $task)) {
             $manager->remove($task);
             $manager->flush();
             $this->addFlash('success', 'La tâche a bien été supprimée.');
