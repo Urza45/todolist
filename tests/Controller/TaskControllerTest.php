@@ -130,23 +130,23 @@ class TaskControllerTest extends WebTestCase
         $urlGenerator = $this->client->getContainer()->get('router.default');
         $crawler = $this->client->request(
             Request::METHOD_GET,
-            $urlGenerator->generate('task_delete', ["id" => 10])
+            $urlGenerator->generate('task_delete', ["id" => 4])
         );
 
-        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+        $this->client->followRedirect();
+        $this->assertStringContainsString('La tâche a bien été supprimée.', $this->client->getResponse()->getContent());
     }
 
-    public function testNotGrantedDeleteTaskAction(ValidationAccess $validator)
+    public function testNotGrantedDeleteTaskAction()
     {
         $user = $this->getTestUser();
 
-
         $urlGenerator = $this->client->getContainer()->get('router.default');
-        $crawler = $this->client->request(
+        $this->client->request(
             Request::METHOD_POST,
             $urlGenerator->generate('task_delete', ["id" => 8])
         );
-
-        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+        $this->client->followRedirect();
+        $this->assertStringContainsString('Vous ne pouvez pas supprimer cette tache.', $this->client->getResponse()->getContent());
     }
 }
