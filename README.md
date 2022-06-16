@@ -62,15 +62,11 @@ The present project was developed with:
 
 1.Clone Repository on your web server :
 
-    ```text
     git clone git@github.com:Urza45/todolist.git
-    ```
 
 2.Install dependencies, in a command prompt:
 
-    ```text
     composer install
-    ```
 
 3.Configure BDD connect on `.env` file
 
