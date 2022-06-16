@@ -38,9 +38,11 @@ The company ToDo & Co having succeeded in raising funds to allow the development
 ### Technical documentation
 
 You are asked to produce documentation explaining how the authentication implementation was done. This documentation is intended for the next junior developers who will join the team in a few weeks. In this documentation, it should be possible for a beginner with the Symfony framework to:
+
     - Understand which file(s) need to be modified and why;
     - How authentication works;
     - Where are users stored.
+
 In addition, you lead the way in terms of collaboration with several people on this project. You are also asked to produce a document explaining how all developers wishing to make changes to the project should proceed.
 This document should also detail the quality process to be used as well as the rules to be respected.
 
