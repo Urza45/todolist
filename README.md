@@ -16,28 +16,35 @@ The company ToDo & Co having succeeded in raising funds to allow the development
 
 ## Description of need
 
-Bug fixes
-• A task must be attached to a user:
-o When saving the task, the authenticated user is attached to the newly created task
-o When editing the task, the author cannot be changed.
-o For tasks already created, they must be attached to an “anonymous” user.
-• Choose a role for a user: When creating a user, it must be possible to choose a role for it. The roles listed are:
-o User role (ROLE_USER);
-o Administrator role (ROLE_ADMIN).
-Implementation of new features
-• Permission
-o Only users with the administrator role (ROLE_ADMIN) should be able to access the user management pages.
-o Tasks can only be deleted by users who created the task in question.
-o Tasks attached to the “anonymous” user can only be deleted by users with the administrator role (ROLE_ADMIN).
-• Implementation of automated tests: You are asked to implement the automated tests (unit and functional tests) necessary to ensure that the operation of the application is in line with the requests.
-Technical documentation
+### Bug fixes
+
+    - A task must be attached to a user:
+        o When saving the task, the authenticated user is attached to the newly created task
+        o When editing the task, the author cannot be changed.
+        o For tasks already created, they must be attached to an “anonymous” user.
+    - Choose a role for a user: When creating a user, it must be possible to choose a role for it. The roles listed are:
+        o User role (ROLE_USER);
+        o Administrator role (ROLE_ADMIN).
+
+### Implementation of new features
+
+    - Permission
+        o Only users with the administrator role (ROLE_ADMIN) should be able to access the user management pages.
+        o Tasks can only be deleted by users who created the task in question.
+        o Tasks attached to the “anonymous” user can only be deleted by users with the administrator role (ROLE_ADMIN).
+    - Implementation of automated tests: 
+        You are asked to implement the automated tests (unit and functional tests) necessary to ensure that the operation of the application is in line with the requests.
+
+### Technical documentation
+
 You are asked to produce documentation explaining how the authentication implementation was done. This documentation is intended for the next junior developers who will join the team in a few weeks. In this documentation, it should be possible for a beginner with the Symfony framework to:
-o Understand which file(s) need to be modified and why;
-o How authentication works;
-o Where are users stored.
+    o Understand which file(s) need to be modified and why;
+    o How authentication works;
+    o Where are users stored.
 In addition, you lead the way in terms of collaboration with several people on this project. You are also asked to produce a document explaining how all developers wishing to make changes to the project should proceed.
 This document should also detail the quality process to be used as well as the rules to be respected.
-Code quality audit & application performance
+
+### Code quality audit & application performance
 
 The founders wish to perpetuate the development of the application. That said, they first want to make an inventory of the technical debt of the application.
 At the end of your work on the application, you are asked to produce a code audit on the following two axes: code quality and performance.
@@ -73,8 +80,8 @@ composer prepare
 
 7.Account fixtures:
 
-- Login  : admin
-- Pass   : admin
+    - Login  : admin
+    - Pass   : admin
 
-- Login  : user1
-- Pass   : admin
+    - Login  : user1
+    - Pass   : admin
