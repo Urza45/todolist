@@ -10,9 +10,9 @@ ToDo & Co is a startup whose core business is an application to manage daily tas
 The application had to be developed at full speed to show potential investors that the concept is viable (we are talking about Minimum Viable Product MVP).
 The choice of the previous developer was to use the Symfony PHP framework.
 The company ToDo & Co having succeeded in raising funds to allow the development of the company and especially of the application, you are hired as an experienced developer in charge of the following tasks:
-• Implementation of new features.
-• The correction of some anomalies.
-• Implementation of automated tests.
+    • Implementation of new features.
+    • The correction of some anomalies.
+    • Implementation of automated tests.
 
 ## Description of need
 
@@ -60,23 +60,23 @@ The present project was developed with:
 
 1.Clone Repository on your web server :
 
-```text
-# git clone git@github.com:Urza45/todolist.git
-```
+    ```text
+    git clone git@github.com:Urza45/todolist.git
+    ```
 
 2.Install dependencies, in a command prompt:
 
-```text
-composer install
-```
+    ```text
+    composer install
+    ```
 
 3.Configure BDD connect on `.env` file
 
 4.Create database, migrations and fixtures, in a command prompt:
 
-```text
-composer prepare
-```
+    ```text
+    composer prepare
+    ```
 
 7.Account fixtures:
 
