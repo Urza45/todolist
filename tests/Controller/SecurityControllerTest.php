@@ -27,7 +27,7 @@ class SecurityControllerTest extends WebTestCase
     {
         $urlGenerator = $this->client->getContainer()->get('router.default');
         $crawler = $this->client->request(Request::METHOD_GET, $urlGenerator->generate('login'));
-        $form = $crawler->selectButton('Sign in')->form(
+        $form = $crawler->selectButton('Connexion')->form(
             [
                 'username' => 'Serge',
                 'password' => '112222'

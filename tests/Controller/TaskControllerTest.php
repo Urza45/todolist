@@ -9,27 +9,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HTTPFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class TaskControllerTest extends WebTestCase
+class TaskControllerTest extends ConnectedUserWebTestCase
 {
-    private $client = null;
-
-    public function setUp(): void
-    {
-        $this->client = static::createClient();
-    }
-
-    private function getTestUser()
-    {
-        $userRepository = static::getContainer()->get(UserRepository::class);
-        // retrieve the test user
-        $testUser = $userRepository->findOneByUsername('admin');
-        // simulate $testUser being logged in
-        $this->client->loginUser($testUser);
-    }
 
     public function testListAction()
     {
-        $this->getTestUser();
         $urlGenerator = $this->client->getContainer()->get('router.default');
 
         $this->client->request(
@@ -42,7 +26,6 @@ class TaskControllerTest extends WebTestCase
 
     public function testListToDoAction()
     {
-        $this->getTestUser();
         $urlGenerator = $this->client->getContainer()->get('router.default');
 
         $this->client->request(
@@ -55,7 +38,6 @@ class TaskControllerTest extends WebTestCase
 
     public function testListDoneAction()
     {
-        $this->getTestUser();
         $urlGenerator = $this->client->getContainer()->get('router.default');
 
         $this->client->request(
@@ -68,7 +50,6 @@ class TaskControllerTest extends WebTestCase
 
     public function testCreateAction()
     {
-        $this->getTestUser();
         $urlGenerator = $this->client->getContainer()->get('router.default');
         $crawler = $this->client->request(
             Request::METHOD_POST,
@@ -91,7 +72,6 @@ class TaskControllerTest extends WebTestCase
 
     public function testEditAction()
     {
-        $this->getTestUser();
         $urlGenerator = $this->client->getContainer()->get('router.default');
         $crawler = $this->client->request(
             Request::METHOD_GET,
@@ -114,7 +94,6 @@ class TaskControllerTest extends WebTestCase
 
     public function testToggleTaskAction()
     {
-        $this->getTestUser();
         $urlGenerator = $this->client->getContainer()->get('router.default');
         $crawler = $this->client->request(
             Request::METHOD_GET,
@@ -126,9 +105,8 @@ class TaskControllerTest extends WebTestCase
 
     public function testGrantedDeleteTaskAction()
     {
-        $this->getTestUser();
         $urlGenerator = $this->client->getContainer()->get('router.default');
-        $crawler = $this->client->request(
+        $this->client->request(
             Request::METHOD_GET,
             $urlGenerator->generate('task_delete', ["id" => 4])
         );
@@ -139,8 +117,6 @@ class TaskControllerTest extends WebTestCase
 
     public function testNotGrantedDeleteTaskAction()
     {
-        $user = $this->getTestUser();
-
         $urlGenerator = $this->client->getContainer()->get('router.default');
         $this->client->request(
             Request::METHOD_POST,

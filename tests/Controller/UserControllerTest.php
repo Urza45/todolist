@@ -9,27 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HTTPFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class UserControllerTest extends WebTestCase
+class UserControllerTest extends ConnectedUserWebTestCase
 {
-    private $client = null;
-
-    public function setUp(): void
-    {
-        $this->client = static::createClient();
-    }
-
-    private function getUser()
-    {
-        $userRepository = static::getContainer()->get(UserRepository::class);
-        // retrieve the test user
-        $testUser = $userRepository->findOneByUsername('admin');
-        // simulate $testUser being logged in
-        $this->client->loginUser($testUser);
-    }
-
     public function testListAction()
     {
-        $this->getUser();
         $urlGenerator = $this->client->getContainer()->get('router.default');
 
         $this->client->request(
@@ -42,7 +25,6 @@ class UserControllerTest extends WebTestCase
 
     public function testCreateAction()
     {
-        $this->getUser();
         $urlGenerator = $this->client->getContainer()->get('router.default');
         $crawler = $this->client->request(
             Request::METHOD_POST,
@@ -68,7 +50,6 @@ class UserControllerTest extends WebTestCase
 
     public function testEditAction()
     {
-        $this->getUser();
         $urlGenerator = $this->client->getContainer()->get('router.default');
         $crawler = $this->client->request(
             Request::METHOD_GET,

@@ -37,9 +37,6 @@ class TaskVoter extends Voter
             return false;
         }
 
-        // Checking if the task has an author
-
-
         // ... (check conditions and return true to grant permission) ...
         switch ($attribute) {
             case self::TASK_CREATE:
@@ -82,7 +79,7 @@ class TaskVoter extends Voter
         return true;
     }
 
-    private function canDelete(Task $task, User $user)
+    private function canDelete(Task $task, User $user )
     {
         return (
             (($task->getUser() === null) && in_array("ROLE_ADMIN", $user->getRoles()))
