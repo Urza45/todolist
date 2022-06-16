@@ -10,6 +10,7 @@ ToDo & Co is a startup whose core business is an application to manage daily tas
 The application had to be developed at full speed to show potential investors that the concept is viable (we are talking about Minimum Viable Product MVP).
 The choice of the previous developer was to use the Symfony PHP framework.
 The company ToDo & Co having succeeded in raising funds to allow the development of the company and especially of the application, you are hired as an experienced developer in charge of the following tasks:
+
     - Implementation of new features.
     - The correction of some anomalies.
     - Implementation of automated tests.
