@@ -10,9 +10,9 @@ ToDo & Co is a startup whose core business is an application to manage daily tas
 The application had to be developed at full speed to show potential investors that the concept is viable (we are talking about Minimum Viable Product MVP).
 The choice of the previous developer was to use the Symfony PHP framework.
 The company ToDo & Co having succeeded in raising funds to allow the development of the company and especially of the application, you are hired as an experienced developer in charge of the following tasks:
-    • Implementation of new features.
-    • The correction of some anomalies.
-    • Implementation of automated tests.
+    - Implementation of new features.
+    - The correction of some anomalies.
+    - Implementation of automated tests.
 
 ## Description of need
 
@@ -38,9 +38,9 @@ The company ToDo & Co having succeeded in raising funds to allow the development
 ### Technical documentation
 
 You are asked to produce documentation explaining how the authentication implementation was done. This documentation is intended for the next junior developers who will join the team in a few weeks. In this documentation, it should be possible for a beginner with the Symfony framework to:
-    o Understand which file(s) need to be modified and why;
-    o How authentication works;
-    o Where are users stored.
+    - Understand which file(s) need to be modified and why;
+    - How authentication works;
+    - Where are users stored.
 In addition, you lead the way in terms of collaboration with several people on this project. You are also asked to produce a document explaining how all developers wishing to make changes to the project should proceed.
 This document should also detail the quality process to be used as well as the rules to be respected.
 
