@@ -76,9 +76,7 @@ The present project was developed with:
 
 4.Create database, migrations and fixtures, in a command prompt:
 
-    ```text
     composer prepare
-    ```
 
 7.Account fixtures:
 
