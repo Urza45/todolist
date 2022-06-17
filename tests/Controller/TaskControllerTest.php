@@ -7,6 +7,7 @@ use App\Repository\UserRepository;
 use App\Services\ValidationAccess;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HTTPFoundation\Response;
+use App\Tests\Controller\ConnectedUserWebTestCase;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class TaskControllerTest extends ConnectedUserWebTestCase

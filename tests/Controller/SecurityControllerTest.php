@@ -4,6 +4,7 @@ namespace App\Tests\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HTTPFoundation\Response;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class SecurityControllerTest extends WebTestCase
@@ -38,5 +39,29 @@ class SecurityControllerTest extends WebTestCase
         $this->client->followRedirect();
         $this->assertSelectorExists('.alert.alert-danger');
         // $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+    }
+
+    public function testLogout()
+    {
+        $userRepository = static::getContainer()->get(UserRepository::class);
+        // retrieve the test user
+        $testUser = $userRepository->findOneByUsername('admin');
+        // simulate $testUser being logged in
+        $this->client->loginUser($testUser);
+
+        $this->client->request('GET', '/logout');
+        $this->client->followRedirect();
+        $this->assertStringContainsString('Se connecter', $this->client->getResponse()->getContent());
+        // $this->assertSame(1, $this->client->getResponse()->filter('html:contains("Se connecter")')->count());
+
+
+        // $this->client->followRedirect();
+
+        // $response = $this->client->getResponse();
+        // $this->assertSame(302, $response->getStatusCode());
+
+        // $crawler = $this->client->followRedirect();
+        // $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+        // $this->assertSame(1, $crawler->filter('html:contains("Se connecter")')->count());
     }
 }

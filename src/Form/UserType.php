@@ -65,7 +65,6 @@ class UserType extends AbstractType
             ->add(
                 'roles',
                 ChoiceType::class,
-                // RadioType::class,
                 [
                     'choices' => [
                         'Admininistrateur' => 'ROLE_ADMIN',
