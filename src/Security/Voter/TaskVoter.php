@@ -64,6 +64,15 @@ class TaskVoter extends Voter
         return false;
     }
 
+    private function canDelete(Task $task, User $user )
+    {
+        return (
+            (($task->getUser() === null) && in_array("ROLE_ADMIN", $user->getRoles()))
+            or
+            (($task->getUser() == $user))
+        );
+    }
+
     private function canCreate(Task $task, User $user)
     {
         return true;
@@ -79,12 +88,5 @@ class TaskVoter extends Voter
         return true;
     }
 
-    private function canDelete(Task $task, User $user )
-    {
-        return (
-            (($task->getUser() === null) && in_array("ROLE_ADMIN", $user->getRoles()))
-            or
-            (($task->getUser() == $user))
-        );
-    }
+    
 }

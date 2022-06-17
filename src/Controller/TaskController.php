@@ -89,6 +89,7 @@ class TaskController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $manager = $doctrine->getManager();
+            // Add connected User as creator
             $task->setUser($this->getUser());
             $manager->persist($task);
             $manager->flush();
@@ -166,7 +167,6 @@ class TaskController extends AbstractController
      */
     public function deleteTaskAction(Task $task, ManagerRegistry $doctrine)
     {
-        // $this->denyAccessUnlessGranted('task_delete', $task, 'Vous ne pouvez pas supprimer cette tâche');
         $manager = $doctrine->getManager();
 
         if ($this->isGranted('task_delete', $task)) {
