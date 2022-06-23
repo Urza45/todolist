@@ -53,15 +53,5 @@ class SecurityControllerTest extends WebTestCase
         $this->client->followRedirect();
         $this->assertStringContainsString('Se connecter', $this->client->getResponse()->getContent());
         // $this->assertSame(1, $this->client->getResponse()->filter('html:contains("Se connecter")')->count());
-
-
-        // $this->client->followRedirect();
-
-        // $response = $this->client->getResponse();
-        // $this->assertSame(302, $response->getStatusCode());
-
-        // $crawler = $this->client->followRedirect();
-        // $this->assertSame(200, $this->client->getResponse()->getStatusCode());
-        // $this->assertSame(1, $crawler->filter('html:contains("Se connecter")')->count());
     }
 }
